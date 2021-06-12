@@ -1,0 +1,2 @@
+rootProject.name = "MySearchPhotosApp"
+include ':app'
