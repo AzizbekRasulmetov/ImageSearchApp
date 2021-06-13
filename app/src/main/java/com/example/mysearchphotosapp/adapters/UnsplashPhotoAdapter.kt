@@ -6,7 +6,6 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.TransitionOptions
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.mysearchphotosapp.R
 import com.example.mysearchphotosapp.databinding.ItemUnsplashPhotoBinding
@@ -17,6 +16,18 @@ class UnsplashPhotoAdapter
 
     inner class PhotoViewHolder(private val binding: ItemUnsplashPhotoBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            itemView.setOnClickListener {
+                photoClickListener?.let {
+                    val position = bindingAdapterPosition
+                    if (position != -1) {
+                        val item = getItem(position)
+                        item?.let(it)
+                    }
+                }
+            }
+        }
 
         fun onBind(unsplashPhoto: UnsplashPhoto) {
             binding.apply {
@@ -41,7 +52,7 @@ class UnsplashPhotoAdapter
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         val currentItem = getItem(position)
-        if(currentItem != null) holder.onBind(currentItem)
+        if (currentItem != null) holder.onBind(currentItem)
     }
 
     companion object {
@@ -60,5 +71,10 @@ class UnsplashPhotoAdapter
         }
     }
 
+    private var photoClickListener: ((UnsplashPhoto) -> Unit)? = null
+
+    fun setPhotoClickListener(listener: (UnsplashPhoto) -> Unit) {
+        this.photoClickListener = listener
+    }
 
 }

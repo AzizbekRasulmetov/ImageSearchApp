@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/photoFragment"
         android:name="com.example.mysearchphotosapp.ui.fragments.PhotoFragment"
-        android:label="Photo" />
+        android:label="Photo" >
+        <argument
+            android:name="photo"
+            app:argType="com.example.mysearchphotosapp.models.UnsplashPhoto" />
+    </fragment>
     <fragment
         android:id="@+id/galleryFragment"
         android:name="com.example.mysearchphotosapp.ui.fragments.GalleryFragment"
